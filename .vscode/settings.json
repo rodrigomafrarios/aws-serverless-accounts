@@ -1,0 +1,14 @@
+{
+  "[typescript]": {
+    "editor.rulers": [
+      {
+        "column": 80,
+        "color": "#424142"
+      }
+    ],
+    "editor.defaultFormatter": null,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  }
+}

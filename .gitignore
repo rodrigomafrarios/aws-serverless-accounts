@@ -1,0 +1,15 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+.husky
+
+terraform/env/dev/.terraform
+terraform/env/dev/.terraform.lock.hcl
+terraform/env/dev/terraform.tfstate.d
+
+coverage
+.terraform
