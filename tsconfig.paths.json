@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "api",
-    "outDir": "dist",
+    "outDir": "dist/api",
     "rootDirs": ["api", "tests"],
     "paths": {
       "@/tests/*": ["../tests/*"],

@@ -15,9 +15,11 @@
     "test:ci": "npm test -- --coverage",
     "lint": "eslint --cache --ext .ts api/",
     "debug": "LOGGER_LEVEL=trace AWS_PROFILE=dev sls offline --noPrependStageInUrl --printOutput --noTimeout --lazy",
-    "build": "sucrase ./api -d ./dist --transforms typescript,imports && tsc -p tsconfig-build.json",
-    "build:watch": "sucrase ./api -d ./.build --transforms typescript,imports && tsc -p tsconfig-build.json -w",
-    "postbuild": "cp package.json dist/package.json && cd dist && npm install --production && zip -r accounts.zip ./ && mv accounts.zip ../.serverless/"
+    "build": "sucrase ./api -d ./dist/api --transforms typescript,imports && tsc -p tsconfig-build.json",
+    "build:watch": "sucrase ./api -d ./dist --transforms typescript,imports && tsc -p tsconfig-build.json -w",
+    "deploy:main": "zip -r latest.zip ./api/main && rm -r ./api/main",
+    "deploy:layer": "mv -t nodejs node_modules api package.json && zip -9 -r --quiet layer.zip ./nodejs",
+    "postbuild": "cp package.json dist/package.json && cd dist && npm install --production && npm run deploy:main && npm run deploy:layer"
   },
   "engines": {
     "node": ">=14.15.0"
@@ -25,7 +27,6 @@
   "dependencies": {
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
-    "aws-sdk": "^2.907.0",
     "bcrypt": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
