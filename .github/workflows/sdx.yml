@@ -38,7 +38,6 @@ jobs:
       - name: Upload
         id: upload
         run: |
-          echo Uploading s3
           functions=`cat lambdas`
           for item in $functions; do aws s3 cp dist/latest.zip s3://${{ secrets.AWS_DEPLOY_BUCKET_NAME }}/deploy/$item/latest.zip; done
           for item in $functions; do aws s3 cp dist/layer.zip s3://${{ secrets.AWS_DEPLOY_BUCKET_NAME }}/deploy/$item/layer.zip; done
