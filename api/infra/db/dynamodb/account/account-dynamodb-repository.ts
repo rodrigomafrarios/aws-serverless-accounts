@@ -14,7 +14,7 @@ UpdateAccessTokenRepository {
 
   async loadByEmail (email: string): Promise<AccountModel> {
     const output = await this.client.get({
-      TableName: process.env.DYNAMODB_ACCOUNTS,
+      TableName: process.env.DYNAMODB_TABLE_ACCOUNTS,
       Key: {
         email
       }
@@ -32,7 +32,7 @@ UpdateAccessTokenRepository {
     await this.client.transactWrite({
       TransactItems: [{
         Update: {
-          TableName: process.env.DYNAMODB_ACCOUNTS,
+          TableName: process.env.DYNAMODB_TABLE_ACCOUNTS,
           Key: {
             email
           },
@@ -49,7 +49,7 @@ UpdateAccessTokenRepository {
     await this.client.transactWrite({
       TransactItems: [{
         Put: {
-          TableName: process.env.DYNAMODB_ACCOUNTS,
+          TableName: process.env.DYNAMODB_TABLE_ACCOUNTS,
           Item: {
             id: uuidv4(),
             ...addAccountParams

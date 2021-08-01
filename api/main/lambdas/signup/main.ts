@@ -5,8 +5,8 @@ import type { ValidatedEventAPIGatewayProxyEvent } from '@/libs/apiGateway'
 import { middyfy } from '@/libs/lambda'
 
 import schema from './schema'
-import { lambdaAdapt } from '@/main/adapters/lambda-adapter'
-import { makeSignUpController } from '@/main/factories/controllers/signup/signup-controller-factory'
+import { lambdaAdapt } from '../../../main/adapters/lambda-adapter'
+import { makeSignUpController } from '../../../main/factories/controllers/signup/signup-controller-factory'
 
 const signUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   const { body } = event

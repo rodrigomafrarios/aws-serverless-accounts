@@ -23,7 +23,7 @@ const makeSut = (): SutTypes => {
 
 describe('AccountDynamoDbRepository', () => {
   beforeAll(() => {
-    process.env.DYNAMODB_ACCOUNTS = 'test-accounts'
+    process.env.DYNAMODB_TABLE_ACCOUNTS = 'test-accounts'
   })
   describe('loadByEmail()', () => {
     test('Should load an account', async () => {
@@ -75,7 +75,7 @@ describe('AccountDynamoDbRepository', () => {
       await sut.updateAccessToken('any_email@gmail.com', 'any_token')
 
       const { Item } = await client.get({
-        TableName: process.env.DYNAMODB_ACCOUNTS,
+        TableName: process.env.DYNAMODB_TABLE_ACCOUNTS,
         Key: {
           email: 'any_email@gmail.com'
         }
