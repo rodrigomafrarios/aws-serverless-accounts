@@ -5,9 +5,10 @@
   "main": "serverless.ts",
   "scripts": {
     "prepare": "husky install",
-    "add:lint-staged": "npx mrm lint-staged",
-    "hooks:pre-commit": "npm run add:lint-staged && npx husky add .husky/pre-commit 'npx lint-staged'",
-    "hooks:add": "npm run prepare && npm run hooks:pre-commit",
+    "add:lint-staged": "npx mrm@2 lint-staged",
+    "hooks:pre-commit": "npm run add:lint-staged",
+    "hooks:pre-push": "npx husky add .husky/pre-push 'npm run lint' && npx husky add .husky/pre-push 'npm run test:ci'",
+    "hooks:add": "npm run prepare && npm run hooks:pre-commit && npm run hooks:pre-push",
     "mkdir:dist": "mkdir ./dist",
     "mkdir:api": "mkdir ./dist/api",
     "mkdir:nodejs": "mkdir ./dist/nodejs",
