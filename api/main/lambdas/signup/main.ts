@@ -8,6 +8,8 @@ import schema from './schema'
 import { lambdaAdapt } from '../../../main/adapters/lambda-adapter'
 import { makeSignUpController } from '../../../main/factories/controllers/signup/signup-controller-factory'
 
+// atualizando via s3 notification
+
 const signUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   const { body } = event
   const controller = makeSignUpController()

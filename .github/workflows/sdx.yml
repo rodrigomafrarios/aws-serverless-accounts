@@ -39,5 +39,5 @@ jobs:
         id: upload
         run: |
           echo Uploading s3
-          aws s3 cp dist/latest.zip s3://{{ secrets.AWS_DEPLOY_BUCKET_NAME }}/deploy/latest.zip
-          aws s3 cp dist/layer.zip s3://{{ secrets.AWS_DEPLOY_BUCKET_NAME }}/deploy/layer.zip
+          aws s3 cp dist/latest.zip s3://${{ secrets.AWS_DEPLOY_BUCKET_NAME }}/deploy/accounts/latest.zip
+          aws s3 cp dist/layer.zip s3://${{ secrets.AWS_DEPLOY_BUCKET_NAME }}/deploy/accounts/layer.zip
