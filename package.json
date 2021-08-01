@@ -17,9 +17,9 @@
     "debug": "LOGGER_LEVEL=trace AWS_PROFILE=dev sls offline --noPrependStageInUrl --printOutput --noTimeout --lazy",
     "build": "sucrase ./api -d ./dist/api --transforms typescript,imports && tsc -p tsconfig-build.json",
     "build:watch": "sucrase ./api -d ./dist --transforms typescript,imports && tsc -p tsconfig-build.json -w",
-    "deploy:main": "zip -r latest.zip ./api/main && rm -r ./api/main",
-    "deploy:layer": "mv -t nodejs node_modules api package.json && zip -9 -r --quiet layer.zip ./nodejs",
-    "postbuild": "cp package.json dist/package.json && cd dist && npm install --production && npm run deploy:main && npm run deploy:layer"
+    "zip:main": "zip -r latest.zip ./api/main && rm -r ./api/main",
+    "zip:layer": "mv -t nodejs node_modules api package.json && zip -9 -r --quiet layer.zip ./nodejs",
+    "postbuild": "cp package.json dist/package.json && cd dist && npm install --production && npm run zip:main && npm run zip:layer"
   },
   "engines": {
     "node": ">=14.15.0"
