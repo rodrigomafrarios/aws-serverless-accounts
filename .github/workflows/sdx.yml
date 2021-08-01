@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+      - sdx
+
+name: Deploy to Sandbox (S3)
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: sdx
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Mkdir zip paths
+        id: dist
+        run: |
+          npm run mkdir:dist
+          npm run mkdir:api
+          npm run mkdir:nodejs
+
+      - name: Install & Build
+        id: build
+        run: |
+          npm install
+          npm run build
+
+      - name: Upload
+        id: upload
+        run: |
+          echo Uploading s3
+          aws s3 cp dist/latest.zip s3://{{ secrets.AWS_DEPLOY_BUCKET_NAME }}/deploy/latest.zip
+          aws s3 cp dist/layer.zip s3://{{ secrets.AWS_DEPLOY_BUCKET_NAME }}/deploy/layer.zip
